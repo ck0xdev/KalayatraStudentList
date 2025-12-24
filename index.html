@@ -15,7 +15,6 @@
                --text-secondary: #64748b;
                --card-bg: #ffffff;
                --accent-color: #6366f1;
-               /* Soft Indigo */
 
                /* Badges */
                --badge-leader-bg: #fff1f2;
@@ -70,7 +69,6 @@
                z-index: 1000;
                margin-bottom: 30px;
                gap: 15px;
-               /* Spacing between elements */
                transition: all 0.3s ease;
           }
 
@@ -89,7 +87,6 @@
           /* Search Area */
           .search-wrapper {
                flex-grow: 1;
-               /* Takes up remaining space */
                max-width: 400px;
                position: relative;
                margin: 0 15px;
@@ -137,7 +134,6 @@
                transition: all 0.3s ease;
                box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
                white-space: nowrap;
-               /* Prevent text wrapping */
                flex-shrink: 0;
                display: flex;
                align-items: center;
@@ -172,6 +168,23 @@
                margin: 0 0 10px 0;
                letter-spacing: -1px;
                line-height: 1.2;
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               gap: 12px;
+               flex-wrap: wrap;
+          }
+
+          /* Total Count Badge */
+          .count-badge {
+               background-color: #e0e7ff;
+               color: var(--accent-color);
+               font-size: 1rem;
+               padding: 5px 15px;
+               border-radius: 50px;
+               vertical-align: middle;
+               font-weight: 700;
+               letter-spacing: 0;
           }
 
           .header-text p {
@@ -294,7 +307,6 @@
           @media (max-width: 768px) {
                nav {
                     flex-wrap: wrap;
-                    /* Allows wrapping on small screens */
                     justify-content: space-between;
                     padding: 15px 20px;
                }
@@ -305,21 +317,23 @@
 
                .btn-add {
                     order: 2;
-                    /* Button stays next to logo on top row */
                     padding: 8px 16px;
                     font-size: 0.85rem;
                }
 
                .search-wrapper {
                     order: 3;
-                    /* Search moves to next row */
                     min-width: 100%;
-                    /* Full width */
                     margin: 10px 0 0 0;
                }
 
                .header-text h1 {
                     font-size: 1.8rem;
+               }
+
+               .count-badge {
+                    font-size: 0.8rem;
+                    padding: 4px 10px;
                }
 
                .grid {
@@ -362,7 +376,7 @@
 
      <div class="container">
           <div class="header-text">
-               <h1>The Team</h1>
+               <h1>The Team <span class="count-badge" id="total-badge">0</span></h1>
                <p>Meet the creative minds behind the journey.</p>
           </div>
 
@@ -372,9 +386,12 @@
 
      <script>
           const students = [
+               // --- LEADERS (Top Priority) ---
                { name: "Jay Vanra", phase: "Phase 1", role: "Leader" },
                { name: "Kukadiya Chintan", phase: "Phase 2", role: "Leader" },
                { name: "Dharmik Vasesa", phase: "Phase 3", role: "Leader" },
+
+               // --- PHASE 1, 1&2, ALL ---
                { name: "Kavya Kalpeshkumar A", phase: "ALL", role: "Sound Editing" },
                { name: "Roy Malay Benu", phase: "Phase 1", role: "Banner Holder" },
                { name: "Mohammad Mobin", phase: "Phase 1", role: "Banner Holder" },
@@ -386,12 +403,19 @@
                { name: "Bhatiya Riya", phase: "Phase 1", role: "Infrastructure Model Holding" },
                { name: "Meet Parmar", phase: "Phase 1", role: "Science" },
                { name: "Malek Sufiyan", phase: "Phase 1", role: "Soldier" },
+               { name: "Dhruvi Khodakiya", phase: "Phase 1", role: "Teacher" },
+               { name: "Virani Dhvani", phase: "Phase 1", role: "Poster" },
+               { name: "Anvesha Mistry", phase: "Phase 1", role: "Time Line Banner" },
+               { name: "Rutika Mahale", phase: "Phase 1", role: "Member" },
+               { name: "Jai Sarvaiya", phase: "Phase 1", role: "Narrator" },
                { name: "Pal Gauravkumar Shah", phase: "Phase 1 & 2", role: "Infrastructure Model" },
                { name: "Patel Ehtesham", phase: "Phase 1 & 2", role: "Model Making & Kalayatan" },
                { name: "Yadav Yaxraj", phase: "Phase 1 & 2", role: "Education Sector & Kalayatan" },
                { name: "Korat Satish R.", phase: "Phase 1, 2", role: "Education Sector" },
                { name: "Patel Khyati", phase: "Phase 1, 2", role: "Infrastructure Model" },
                { name: "Ayesha Patel", phase: "Phase 1, 2 & 3", role: "Making Model" },
+
+               // --- PHASE 2 ---
                { name: "Mehta Shivangi", phase: "Phase 2", role: "Member" },
                { name: "Nirvi Miteshkumar Meh", phase: "Phase 2", role: "(Education Sector)" },
                { name: "Paswan Hemant Manoj", phase: "Phase 2", role: "Agricultural" },
@@ -415,13 +439,36 @@
                { name: "Soni Dhanvi", phase: "Phase 2", role: "Volunteer" },
                { name: "Solanki Antra", phase: "Phase 2", role: "Volunteer" },
                { name: "Tanish Kumawat", phase: "Phase 2", role: "Volunteer + Poster Man" },
+               { name: "Sahoo Pransi", phase: "Phase 2", role: "Banner Holder" },
+               { name: "Dalwala Kruti", phase: "Phase 2", role: "Holding Poster" },
+               { name: "Chauhan Prasidhi", phase: "Phase 2", role: "Banner Holding" },
+
+               // --- PHASE 3 ---
                { name: "Kunal Arun Majhi", phase: "Phase 3", role: "Robot" },
+               { name: "Vashisth kahar", phase: "Phase 3", role: "Model Making (Science)" },
+               { name: "Machiswala Mohammed", phase: "Phase 3", role: "Volunteer & Kalayatra" },
+               { name: "Jariwala", phase: "Phase 3", role: "Volunteer" },
+               { name: "Mahek Jariwala", phase: "Phase 3", role: "Model Making" },
+               { name: "Tiwari Upasana Ashish", phase: "Phase 3", role: "Model Buildings & Kalayatra" },
+               { name: "Rohit Chhabaria", phase: "Phase 3", role: "Robot" },
+               { name: "Desai Manan", phase: "Phase 3", role: "Poster Making & Model Holder" },
+               { name: "Bhadiyadra Jainil", phase: "Phase 3", role: "Volunteer" },
+               { name: "Desai Eshva", phase: "Phase 3", role: "Bharat Mata & Poster Making" },
+               { name: "Ansari Md Enamul", phase: "Phase 3", role: "Holding Banners & Projects" },
+               { name: "Ishita Dobani", phase: "Phase 3", role: "Health Model" },
+               { name: "Piyush Patel", phase: "Phase 3", role: "Project Maker" },
+
+               // --- OTHERS (General, Photography, etc.) ---
                { name: "Gajera Harshika", phase: "General", role: "Banner" },
-               { name: "Vashisth kahar", phase: "Phase 3", role: "Model Making (Science)" }
+               { name: "Umar Ansari", phase: "Photography", role: "Photographer" }
           ];
 
           const grid = document.getElementById('card-grid');
           const searchInput = document.getElementById('search-input');
+          const totalBadge = document.getElementById('total-badge');
+
+          // UPDATE THE TOTAL COUNT HERE
+          totalBadge.textContent = students.length;
 
           function getBadgeClass(phase, role) {
                const p = phase.toLowerCase();
@@ -450,8 +497,8 @@
 
                if (filtered.length === 0) {
                     grid.innerHTML = `<div class="no-results">
-                    <p>No matches found for "${filterText}" 👻</p>
-                </div>`;
+                     <p>No matches found for "${filterText}" 👻</p>
+                 </div>`;
                     return;
                }
 
@@ -464,15 +511,15 @@
                     const initials = getInitials(s.name);
 
                     card.innerHTML = `
-                    <div class="card-header">
-                        <div class="avatar-placeholder">${initials}</div>
-                        <span class="phase-badge ${badgeClass}">${s.phase}</span>
-                    </div>
-                    <div>
-                        <h3 class="name">${s.name}</h3>
-                        <div class="role">${s.role}</div>
-                    </div>
-                `;
+                     <div class="card-header">
+                         <div class="avatar-placeholder">${initials}</div>
+                         <span class="phase-badge ${badgeClass}">${s.phase}</span>
+                     </div>
+                     <div>
+                         <h3 class="name">${s.name}</h3>
+                         <div class="role">${s.role}</div>
+                     </div>
+                 `;
                     grid.appendChild(card);
                });
           }
