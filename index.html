@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+     <title>KalaYatra Collective</title>
+     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+     <style>
+          :root {
+               /* Calm Palette */
+               --bg-color: #f8f9fc;
+               --text-main: #1e293b;
+               --text-secondary: #64748b;
+               --card-bg: #ffffff;
+               --accent-color: #6366f1;
+               /* Soft Indigo */
+
+               /* Badges */
+               --badge-leader-bg: #fff1f2;
+               --badge-leader-text: #e11d48;
+               --badge-p1-bg: #eef2ff;
+               --badge-p1-text: #4338ca;
+               --badge-p2-bg: #f0fdf4;
+               --badge-p2-text: #15803d;
+               --badge-all-bg: #fff7ed;
+               --badge-all-text: #c2410c;
+
+               /* Effects */
+               --glass-bg: rgba(255, 255, 255, 0.85);
+               --glass-border: 1px solid rgba(255, 255, 255, 0.5);
+               --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+               --shadow-hover: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+          }
+
+          * {
+               box-sizing: border-box;
+               -webkit-tap-highlight-color: transparent;
+          }
+
+          body {
+               font-family: 'Plus Jakarta Sans', sans-serif;
+               background-color: var(--bg-color);
+               color: var(--text-main);
+               margin: 0;
+               padding: 0;
+               display: flex;
+               flex-direction: column;
+               align-items: center;
+               min-height: 100vh;
+          }
+
+          /* Glassmorphism Header */
+          nav {
+               position: sticky;
+               top: 15px;
+               width: 92%;
+               max-width: 900px;
+               background: var(--glass-bg);
+               backdrop-filter: blur(12px);
+               -webkit-backdrop-filter: blur(12px);
+               border: var(--glass-border);
+               border-radius: 20px;
+               padding: 15px 25px;
+               display: flex;
+               justify-content: space-between;
+               align-items: center;
+               box-shadow: var(--shadow-sm);
+               z-index: 1000;
+               margin-bottom: 30px;
+               gap: 15px;
+               /* Spacing between elements */
+               transition: all 0.3s ease;
+          }
+
+          .logo {
+               font-weight: 800;
+               font-size: 1.3rem;
+               color: var(--text-main);
+               letter-spacing: -0.5px;
+               flex-shrink: 0;
+          }
+
+          .logo span {
+               color: var(--accent-color);
+          }
+
+          /* Search Area */
+          .search-wrapper {
+               flex-grow: 1;
+               /* Takes up remaining space */
+               max-width: 400px;
+               position: relative;
+               margin: 0 15px;
+          }
+
+          #search-input {
+               width: 100%;
+               padding: 12px 20px 12px 45px;
+               border-radius: 50px;
+               border: 1px solid #e2e8f0;
+               background-color: rgba(255, 255, 255, 0.9);
+               font-family: inherit;
+               font-size: 0.95rem;
+               color: var(--text-main);
+               transition: all 0.3s ease;
+               outline: none;
+               appearance: none;
+          }
+
+          #search-input:focus {
+               border-color: var(--accent-color);
+               box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+               background-color: #fff;
+          }
+
+          .search-icon {
+               position: absolute;
+               left: 16px;
+               top: 50%;
+               transform: translateY(-50%);
+               color: var(--text-secondary);
+               pointer-events: none;
+               font-size: 1rem;
+          }
+
+          /* Add Button Styling */
+          .btn-add {
+               background-color: var(--accent-color);
+               color: white;
+               text-decoration: none;
+               padding: 10px 20px;
+               border-radius: 50px;
+               font-weight: 600;
+               font-size: 0.9rem;
+               transition: all 0.3s ease;
+               box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+               white-space: nowrap;
+               /* Prevent text wrapping */
+               flex-shrink: 0;
+               display: flex;
+               align-items: center;
+               gap: 6px;
+          }
+
+          .btn-add:hover {
+               transform: translateY(-2px);
+               box-shadow: 0 6px 15px rgba(99, 102, 241, 0.4);
+               background-color: #5558e6;
+          }
+
+          .btn-add:active {
+               transform: scale(0.95);
+          }
+
+          /* Container & Header Text */
+          .container {
+               width: 92%;
+               max-width: 1200px;
+               padding-bottom: 80px;
+          }
+
+          .header-text {
+               text-align: center;
+               margin-bottom: 30px;
+               padding: 0 10px;
+          }
+
+          .header-text h1 {
+               font-size: 2.2rem;
+               margin: 0 0 10px 0;
+               letter-spacing: -1px;
+               line-height: 1.2;
+          }
+
+          .header-text p {
+               color: var(--text-secondary);
+               font-size: 1.05rem;
+               margin: 0;
+          }
+
+          /* Responsive Grid */
+          .grid {
+               display: grid;
+               grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+               gap: 20px;
+          }
+
+          /* Card Design */
+          .card {
+               background: var(--card-bg);
+               border-radius: 20px;
+               padding: 20px;
+               border: 1px solid rgba(255, 255, 255, 0.6);
+               box-shadow: var(--shadow-sm);
+               transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s;
+               display: flex;
+               flex-direction: column;
+               gap: 12px;
+               position: relative;
+               transform: translateZ(0);
+               will-change: transform;
+          }
+
+          @media (hover: hover) {
+               .card:hover {
+                    transform: translateY(-4px);
+                    box-shadow: var(--shadow-hover);
+                    border-color: rgba(99, 102, 241, 0.3);
+               }
+          }
+
+          .card:active {
+               transform: scale(0.98);
+          }
+
+          .card-header {
+               display: flex;
+               justify-content: space-between;
+               align-items: center;
+          }
+
+          .avatar-placeholder {
+               width: 42px;
+               height: 42px;
+               background: linear-gradient(135deg, #e0e7ff 0%, #fae8ff 100%);
+               border-radius: 14px;
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               font-weight: 700;
+               color: var(--accent-color);
+               font-size: 1.1rem;
+          }
+
+          .name {
+               font-size: 1.1rem;
+               font-weight: 700;
+               margin: 0;
+               color: var(--text-main);
+          }
+
+          .role {
+               font-size: 0.95rem;
+               color: var(--text-secondary);
+               font-weight: 500;
+               line-height: 1.4;
+          }
+
+          .phase-badge {
+               font-size: 0.7rem;
+               font-weight: 700;
+               padding: 6px 10px;
+               border-radius: 30px;
+               text-transform: uppercase;
+               letter-spacing: 0.5px;
+          }
+
+          .badge-leader {
+               background-color: var(--badge-leader-bg);
+               color: var(--badge-leader-text);
+          }
+
+          .badge-p1 {
+               background-color: var(--badge-p1-bg);
+               color: var(--badge-p1-text);
+          }
+
+          .badge-p2 {
+               background-color: var(--badge-p2-bg);
+               color: var(--badge-p2-text);
+          }
+
+          .badge-all {
+               background-color: var(--badge-all-bg);
+               color: var(--badge-all-text);
+          }
+
+          .badge-default {
+               background-color: #f1f5f9;
+               color: #64748b;
+          }
+
+          .no-results {
+               text-align: center;
+               grid-column: 1 / -1;
+               padding: 40px;
+               color: var(--text-secondary);
+               font-size: 1.1rem;
+          }
+
+          /* --- MOBILE MEDIA QUERIES --- */
+          @media (max-width: 768px) {
+               nav {
+                    flex-wrap: wrap;
+                    /* Allows wrapping on small screens */
+                    justify-content: space-between;
+                    padding: 15px 20px;
+               }
+
+               .logo {
+                    order: 1;
+               }
+
+               .btn-add {
+                    order: 2;
+                    /* Button stays next to logo on top row */
+                    padding: 8px 16px;
+                    font-size: 0.85rem;
+               }
+
+               .search-wrapper {
+                    order: 3;
+                    /* Search moves to next row */
+                    min-width: 100%;
+                    /* Full width */
+                    margin: 10px 0 0 0;
+               }
+
+               .header-text h1 {
+                    font-size: 1.8rem;
+               }
+
+               .grid {
+                    grid-template-columns: 1fr;
+               }
+          }
+
+          @keyframes fadeInUp {
+               from {
+                    opacity: 0;
+                    transform: translateY(15px);
+               }
+
+               to {
+                    opacity: 1;
+                    transform: translateY(0);
+               }
+          }
+
+          .card {
+               animation: fadeInUp 0.5s ease-out forwards;
+          }
+     </style>
+</head>
+
+<body>
+
+     <nav>
+          <div class="logo">Kala<span>Yatra</span></div>
+
+          <div class="search-wrapper">
+               <span class="search-icon">🔍</span>
+               <input type="text" id="search-input" placeholder="Search team members...">
+          </div>
+
+          <a href="https://forms.gle/2NroLyvrp4nML5mX8" target="_blank" class="btn-add">
+               Join Team <span>+</span>
+          </a>
+     </nav>
+
+     <div class="container">
+          <div class="header-text">
+               <h1>The Team</h1>
+               <p>Meet the creative minds behind the journey.</p>
+          </div>
+
+          <div class="grid" id="card-grid">
+          </div>
+     </div>
+
+     <script>
+          const students = [
+               { name: "Jay Vanra", phase: "All Phase", role: "Leader" },
+               { name: "Kukadiya Chintan", phase: "All Phase", role: "Co.Leader" },
+               { name: "Kavya Kalpeshkumar A", phase: "ALL", role: "Sound Editing" },
+               { name: "Roy Malay Benu", phase: "Phase 1", role: "Banner Holder" },
+               { name: "Mohammad Mobin", phase: "Phase 1", role: "Banner Holder" },
+               { name: "Muzahid Shaikh", phase: "Phase 1", role: "Civil Engineer" },
+               { name: "Vora Mohamad Aman", phase: "Phase 1", role: "Doctor" },
+               { name: "Sahu Priyanshi", phase: "Phase 1", role: "Flag Holder" },
+               { name: "Rutila Mahale", phase: "Phase 1", role: "Holding Model" },
+               { name: "Ipshita Goyal", phase: "Phase 1", role: "Holding Model" },
+               { name: "Bhatiya Riya", phase: "Phase 1", role: "Infrastructure Model Holding" },
+               { name: "Meet Parmar", phase: "Phase 1", role: "Science" },
+               { name: "Malek Sufiyan", phase: "Phase 1", role: "Soldier" },
+               { name: "Pal Gauravkumar Shah", phase: "Phase 1 & 2", role: "Infrastructure Model" },
+               { name: "Patel Ehtesham", phase: "Phase 1 & 2", role: "Model Making & Kalayatan" },
+               { name: "Yadav Yaxraj", phase: "Phase 1 & 2", role: "Education Sector & Kalayatan" },
+               { name: "Korat Satish R.", phase: "Phase 1, 2", role: "Education Sector" },
+               { name: "Patel Khyati", phase: "Phase 1, 2", role: "Infrastructure Model" },
+               { name: "Ayesha Patel", phase: "Phase 1, 2 & 3", role: "Making Model" },
+               { name: "Mehta Shivangi", phase: "Phase 2", role: "Member" },
+               { name: "Nirvi Miteshkumar Meh", phase: "Phase 2", role: "(Education Sector)" },
+               { name: "Paswan Hemant Manoj", phase: "Phase 2", role: "Agricultural" },
+               { name: "Shah Priyanka Dilipbha", phase: "Phase 2", role: "Agriculture" },
+               { name: "Patel Ayesha Ravindhbh", phase: "Phase 2", role: "Agriculture" },
+               { name: "Ganatra Vanshi", phase: "Phase 2", role: "Doctor / Poster Making" },
+               { name: "Kothwala Darshan Sanj", phase: "Phase 2", role: "Education Sector" },
+               { name: "Soni Siddhi", phase: "Phase 2", role: "Infrastructure Model" },
+               { name: "Darji Pankaj Muk", phase: "Phase 2", role: "Male Teacher" },
+               { name: "Krishna Singh Pawar", phase: "Phase 2", role: "Military Men (Model)" },
+               { name: "Irsadla Sanith", phase: "Phase 2", role: "Model Making (Digital)" },
+               { name: "Guda Sanjay Venubhai", phase: "Phase 2", role: "Model Making (Digital)" },
+               { name: "Khamaru Divya Basudev", phase: "Phase 2", role: "Model Making (Education)" },
+               { name: "Patel Khyati", phase: "Phase 2", role: "Model Making (Infrastructure)" },
+               { name: "Pal Gauravkumar Shah", phase: "Phase 2", role: "Model Making (Infrastructure)" },
+               { name: "Patel Tejashvi", phase: "Phase 2", role: "Model Making (Infrastructure)" },
+               { name: "Prakshal Shah", phase: "Phase 2", role: "Model Making (Science)" },
+               { name: "Patel Aayushi Umeshbha", phase: "Phase 2", role: "Model Making (Space)" },
+               { name: "Meet Parmar", phase: "Phase 2", role: "Space" },
+               { name: "Desai Tiya", phase: "Phase 2", role: "Teacher / Post Making" },
+               { name: "Soni Dhanvi", phase: "Phase 2", role: "Volunteer" },
+               { name: "Solanki Antra", phase: "Phase 2", role: "Volunteer" },
+               { name: "Tanish Kumawat", phase: "Phase 2", role: "Volunteer + Poster Man" },
+               { name: "Kunal Arun Majhi", phase: "Phase 3", role: "Robot" },
+               { name: "Gajera Harshika", phase: "General", role: "Banner" },
+               { name: "Vashisth kahar", phase: "Phase 3", role: "Model Making (Science)" }
+          ];
+
+          const grid = document.getElementById('card-grid');
+          const searchInput = document.getElementById('search-input');
+
+          function getBadgeClass(phase, role) {
+               const p = phase.toLowerCase();
+               const r = role.toLowerCase();
+               if (r.includes('leader')) return 'badge-leader';
+               if (p.includes('all')) return 'badge-all';
+               if (p.includes('1')) return 'badge-p1';
+               if (p.includes('2')) return 'badge-p2';
+               return 'badge-default';
+          }
+
+          function getInitials(name) {
+               return name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+          }
+
+          function renderCards(filterText = '') {
+               grid.innerHTML = '';
+
+               const lowerFilter = filterText.toLowerCase();
+
+               const filtered = students.filter(s => {
+                    return s.name.toLowerCase().includes(lowerFilter) ||
+                         s.role.toLowerCase().includes(lowerFilter) ||
+                         s.phase.toLowerCase().includes(lowerFilter);
+               });
+
+               if (filtered.length === 0) {
+                    grid.innerHTML = `<div class="no-results">
+                    <p>No matches found for "${filterText}" 👻</p>
+                </div>`;
+                    return;
+               }
+
+               filtered.forEach((s, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.style.animationDelay = `${index * 30}ms`;
+
+                    const badgeClass = getBadgeClass(s.phase, s.role);
+                    const initials = getInitials(s.name);
+
+                    card.innerHTML = `
+                    <div class="card-header">
+                        <div class="avatar-placeholder">${initials}</div>
+                        <span class="phase-badge ${badgeClass}">${s.phase}</span>
+                    </div>
+                    <div>
+                        <h3 class="name">${s.name}</h3>
+                        <div class="role">${s.role}</div>
+                    </div>
+                `;
+                    grid.appendChild(card);
+               });
+          }
+
+          searchInput.addEventListener('input', (e) => renderCards(e.target.value));
+          renderCards();
+
+     </script>
+</body>
+
+</html>
